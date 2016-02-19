@@ -1,0 +1,8 @@
+[Plymouth Theme]
+Name=Breeze
+Description=A Breeze Splash
+ModuleName=script
+
+[script]
+ImageDir=/lib/plymouth/themes/breeze
+ScriptFile=/lib/plymouth/themes/breeze/breeze.script
