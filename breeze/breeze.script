@@ -93,7 +93,7 @@ Color = fun(red, green, blue) {
 } | [];
 
 global.colors = [];
-colors.plasma_blue = Col7or(0.2392, 0.6824, 0.913);
+colors.plasma_blue = Color(0.2392, 0.6824, 0.913);
 colors.charcoal_grey = Color(0.1922, 0.2118, 0.2314);
 
 colors.neon_green = Color(0.1020, 0.7373, 0.6118);
