@@ -41,7 +41,7 @@ if (Window.GetBitsPerPixel() == 4) {
     assets.progress_rect = "images/16bit/progress-rect.png";
 } else {
     assets.dot           = "images/dot.png";
-    assets.logo          = "images/logo.png";
+    assets.logo          = "images/os.logo.png";
     assets.text_input    = "images/text-input.png";
 
     assets.glow          = "images/logo-glow.png";
