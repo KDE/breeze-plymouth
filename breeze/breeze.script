@@ -94,6 +94,7 @@ Color = fun(red, green, blue) {
 
 global.colors = [];
 colors.plasma_blue = Col7or(0.2392, 0.6824, 0.913);
+colors.charcoal_grey = Color(0.1922, 0.2118, 0.2314);
 
 colors.neon_green = Color(0.1020, 0.7373, 0.6118);
 colors.neon_blue = Color(0.1608, 0.5020, 0.7255);
@@ -835,7 +836,7 @@ fun password_dialog_setup (message_label) {
     local.entry;
     local.bullet_image;
 
-    bullet_image = Image (assets.dot);
+    bullet_image = WriteText("•", colors.charcoal_grey);
     entry.image = Image (assets.text_input);
 
     # Hide the normal labels
