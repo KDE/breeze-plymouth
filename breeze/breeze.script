@@ -382,30 +382,13 @@ Logo = fun() {
     logo.z = 1000;
     logo.SetPosition(logo.x, logo.y, logo.z);
 
-    if (Window.GetBitsPerPixel() == 4) {
-        logo.progress = [];
-        logo.progress.width = 153 - 6; // 153 is the fixed width of the 'Kubuntu' text.
-        logo.progress.x = logo.x + 2; // 2px left margin.
-        logo.progress.y = logo.y + logo.height + 4; // 4px top margin.
-        logo.progress.z = logo.z + 1; // Lays on top of the logo background.
-        for (i = 0; i <= logo.progress.width; ++i) {
-            logo.progress[i] = SpriteImage(assets.progress_rect);
-            logo.progress[i].SetPosition(logo.progress.x + (logo.progress[i].width * (i+1)),
-                                         logo.progress.y,
-                                         logo.progress.z);
-            logo.progress[i].SetOpacity(0);
-            logo.progress.count = i+1;
-        }
-        logo.progress.head = 0;
-        logo.progress.end  = 0;
-    } else {
-        logo.glow = SpriteImage(assets.glow);
-        logo.glow.SetOpacity(0);
-        logo.glow.x = Window.GetX() + Window.GetWidth() / 2 - logo.glow.width / 2;
-        logo.glow.y = Window.GetY() + Window.GetHeight() / 2 - logo.glow.height / 2;
-        logo.glow.z = logo.z - 1;
-        logo.glow.SetPosition(logo.glow.x, logo.glow.y, logo.glow.z);
-    }
+    logo.name = Sprite(ImageToText("openSUSE 12.0"));
+    logo.name.x = Window.GetX() + Window.GetWidth() / 2 - logo.name.GetImage().GetWidth() / 2;
+    logo.name.y = logo.y + logo.height + logo.name.GetImage().GetHeight() / 2;
+    logo.name.z = logo.z;
+    logo.name.SetPosition(logo.name.x, logo.name.y, logo.z);
+
+    logo.height = logo.height + logo.name.GetImage().GetHeight() ;
 
     return logo | global.Logo;
 } | SpriteImage;
