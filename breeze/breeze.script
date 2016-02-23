@@ -1270,7 +1270,7 @@ fun fsck_check (device, progress, status_string) {
 # Other features can be easily added by parsing the string that we pass plymouth with "--update"
 #
 fun update_status_callback (status) {
-    Debug(status);
+    // Debug(status);
     if (!status) return;
 
     string_it = 0;
