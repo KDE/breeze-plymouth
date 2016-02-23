@@ -678,41 +678,6 @@ fun boot_progress_cb(time, progress) {
     // TODO: it would be nice to have both logics contained in an animation such
     // that we do not need to have this if here...
     spin.Animate(time);
-    if (Window.GetBitsPerPixel() == 4) {
-        if (logo.progress.head >= (logo.progress.count - 1)) {
-            ++logo.progress.end;
-            logo.progress[logo.progress.end].SetOpacity(0);
-            if (logo.progress.end >= (logo.progress.count - 1)) {
-                logo.progress.head = 0;
-                logo.progress.end  = 0;
-            }
-        } else {
-            ++logo.progress.head;
-            logo.progress[logo.progress.head].SetOpacity(1);
-        }
-    } else {
-      if (progress_bar.head >= (progress_bar.count - 1)) {
-          ++progress_bar.tail;
-          progress_bar[progress_bar.tail].SetOpacity(0);
-          if (progress_bar.tail >= (progress_bar.count - 1)) {
-              progress_bar.head = 0;
-              progress_bar.tail  = 0;
-          }
-      } else {
-          ++progress_bar.head;
-          // progress_bar[progress_bar.head].SetOpacity(1);
-      }
-        // if (!global.animation.IsRunning())
-        //     global.animation.Start(time);
-        //
-        // if (global.animation.IsRunning()) {
-        //     if (global.animation.m_end <= time) {
-        //         global.animation.Revert(time);
-        //     } else {
-        //         global.animation.UpdateOpacity(time);
-        //     }
-        // }
-    }
 }
 Plymouth.SetBootProgressFunction (boot_progress_cb);
 
