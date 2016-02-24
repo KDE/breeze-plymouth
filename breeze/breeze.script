@@ -38,22 +38,13 @@ global.defaults.font.title = "Noto Sans 14";
 
 global.assets = [];
 if (Window.GetBitsPerPixel() == 4) {
-    assets.dot           = "images/16bit/dot.png";
     assets.logo          = "images/16bit/logo.png";
     assets.text_input    = "images/16bit/text-input.png";
-
-    assets.progress_rect = "images/16bit/progress-rect.png";
 } else {
-    assets.dot           = "images/dot.png";
     assets.logo          = "images/os.logo.png";
     assets.text_input    = "images/text-input.png";
 
-    assets.glow          = "images/logo-glow.png";
-    assets.progress_rect = "images/progress-rect.png";
-
-    assets.password_icon = "images/password.png";
-
-    assets.spinner_base = "images/spinner";
+    assets.spinner_base  = "images/spinner";
 }
 
 // -------------------------------- Colors ---------------------------------- //
@@ -1070,4 +1061,4 @@ fun quit_callback() {
 }
 Plymouth.SetQuitFunction(quit_callback);
 
-// kate: space-indent on; indent-width 4; mixedindent off; indent-mode cstyle; hl JavaScript;
+// kate: space-indent on; indent-width 2; mixedindent off; indent-mode cstyle; hl JavaScript;
