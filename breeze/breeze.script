@@ -522,8 +522,6 @@ global.spin = Spinner();
  * \param progress boot progress in % (real 0.0 to 1.0)
  */
 fun boot_progress_cb(time, progress) {
-    // TODO: it would be nice to have both logics contained in an animation such
-    // that we do not need to have this if here...
     spin.Animate(time);
 }
 Plymouth.SetBootProgressFunction (boot_progress_cb);
