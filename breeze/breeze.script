@@ -52,33 +52,6 @@ if (Window.GetBitsPerPixel() == 4) {
     assets.spinner_base = "images/spinner";
 }
 
-// ------------------------------- Classes ---------------------------------- //
-
-/**
- * class SpriteImage : Sprite {
- *     Image image,   # Image instance created by and for the Sprite
- *     int width,     # Image width
- *     int height,    # Image height
- *  };
- */
-
-/**
- * General purpose sprite-image combination.
- * The type itself is a Sprite that has an image property through which the image
- * powering the sprite may be accessed.
- * Members of the sprite are only updated on initial creation, any future changes
- * to the actually used image need to be reflected manually
- */
-SpriteImage = fun(asset) {
-    local.sprite = Sprite();
-    sprite.image = Image(asset);
-    sprite.width = sprite.image.GetWidth();
-    sprite.height = sprite.image.GetHeight();
-    sprite.SetImage(sprite.image);
-    return sprite | global.SpriteImage;
-} | Sprite;
-
-
 // -------------------------------- Colors ---------------------------------- //
 /**
  * General purpuse Color container to hold red, green, blue as any value
@@ -120,6 +93,32 @@ Window.ApplyBackgroundColors = fun() {
                                     palette.background.bottom.green,
                                     palette.background.bottom.blue);
 };
+
+// ------------------------------- Classes ---------------------------------- //
+
+/**
+ * class SpriteImage : Sprite {
+ *     Image image,   # Image instance created by and for the Sprite
+ *     int width,     # Image width
+ *     int height,    # Image height
+ *  };
+ */
+
+/**
+ * General purpose sprite-image combination.
+ * The type itself is a Sprite that has an image property through which the image
+ * powering the sprite may be accessed.
+ * Members of the sprite are only updated on initial creation, any future changes
+ * to the actually used image need to be reflected manually
+ */
+SpriteImage = fun(asset) {
+    local.sprite = Sprite();
+    sprite.image = Image(asset);
+    sprite.width = sprite.image.GetWidth();
+    sprite.height = sprite.image.GetHeight();
+    sprite.SetImage(sprite.image);
+    return sprite | global.SpriteImage;
+} | Sprite;
 
 // --------------------------------- Debug ---------------------------------- //
 debugsprite = Sprite();
