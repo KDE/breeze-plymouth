@@ -1,3 +1,38 @@
+# Branding
+## Graphics (breeze)
+
+Branding in the graphics mode is done via the code in
+breeze.script. Do note the guidelines below when changing things.
+In particular you want to change the following variables
+
+```
+// Title and font settings.
+global.title.text = "Plasma 5.6";
+global.defaults.font.default = "Noto Sans 12";
+global.defaults.font.title = "Noto Sans 14";
+
+// Same color or different for gradient.
+palette.background.top = colors.plasma_blue;
+palette.background.bottom = colors.icon_blue;
+```
+
+## Text (breeze-text)
+
+The text theme is configured via the .plymouth theme file,
+so you can simply install your own theme file to apply branding.
+
+```
+[Plymouth Theme]
+Name=Our theme (text)
+Description=A splash for text mode
+ModuleName=breeze-text
+
+[breeze-text]
+title=openSUSE 14
+black=0xfcfcfc # This is the background
+white=0x000000 # This is the progress bar & title
+```
+
 # Design Guideline
 ## Logo
 
@@ -29,6 +64,8 @@ colors can be used, so you will have to make sure the clipped version's drop
 is still appearing as expected.
 
 To convert to <= 16 color version use (< when fewer colors found)
+```
   for foo in *; do pngtopnm $foo | pnmquant 16 | pnmtopng > 16.png; mv 16.png $foo; done
+```
 
 You may want to check that the output makes sense.
