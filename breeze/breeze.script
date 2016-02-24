@@ -107,6 +107,7 @@ palette.background.bottom = colors.icon_blue;
 palette.text.normal = colors.paper_white;
 palette.text.tinted = colors.paper_white;
 palette.text.action = colors.paper_white;
+palette.text.contrast = colors.charcoal_grey; // Inverse essentially
 
 /**
  * Helper overload to apply background colors from global.palette to the Window
@@ -672,7 +673,7 @@ fun password_dialog_setup (message_label) {
     local.entry;
     local.bullet_image;
 
-    bullet_image = WriteText("•", colors.charcoal_grey);
+    bullet_image = WriteText("•", palette.text.contrast);
     entry.image = Image (assets.text_input);
 
     # Hide the normal labels
