@@ -695,7 +695,7 @@ fun password_dialog_setup (message_label) {
     entry.x = Window.GetX () + Window.GetWidth () / 2 - entry.image.GetWidth () / 2;
 
     # Put the entry below the second label.
-    entry.y = message_notification[2].y + label.height;
+    entry.y = message_notification[2].y + label.height + entry.image.GetHeight() / 2;
 
     #Debug ("entry x = " + entry.x + ", y = " + entry.y);
     entry.z = 10000;
