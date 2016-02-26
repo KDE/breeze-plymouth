@@ -84,9 +84,15 @@ Window.ApplyBackgroundColors = fun() {
     Window.SetBackgroundTopColor(palette.background.top.red,
                                  palette.background.top.green,
                                  palette.background.top.blue);
-    Window.SetBackgroundBottomColor(palette.background.bottom.red,
-                                    palette.background.bottom.green,
-                                    palette.background.bottom.blue);
+    if (Window.GetBitsPerPixel() == 4) { // Force no gradient on 16bit.
+        Window.SetBackgroundBottomColor(palette.background.top.red,
+                                     palette.background.top.green,
+                                     palette.background.top.blue);
+    } else {
+        Window.SetBackgroundBottomColor(palette.background.bottom.red,
+                                        palette.background.bottom.green,
+                                        palette.background.bottom.blue);
+    }
 };
 
 // ------------------------------- Classes ---------------------------------- //
