@@ -41,7 +41,7 @@ if (Window.GetBitsPerPixel() == 4) {
     assets.logo          = "images/16bit/logo.png";
     assets.text_input    = "images/16bit/text-input.png";
 } else {
-    assets.logo          = "images/os.logo.png";
+    assets.logo          = "images/kde.logo.png";
     assets.text_input    = "images/text-input.png";
 
     assets.spinner_base  = "images/spinner";
