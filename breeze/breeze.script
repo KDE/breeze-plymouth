@@ -38,8 +38,10 @@ global.defaults.font.title = "Noto Sans 14";
 
 global.assets = [];
 if (Window.GetBitsPerPixel() == 4) {
-    assets.logo          = "images/16bit/logo.png";
+    assets.logo          = "images/16bit/kde.logo.png";
     assets.text_input    = "images/16bit/text-input.png";
+
+    assets.spinner_base  = "images/16bit/spinner";
 } else {
     assets.logo          = "images/kde.logo.png";
     assets.text_input    = "images/text-input.png";
