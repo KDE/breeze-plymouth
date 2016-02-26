@@ -37,16 +37,15 @@ white=0x000000 # This is the progress bar & title
 ## Logo
 
 - 128x128
-- The Logo must be circular.
 - A monochrome logo is fine, it should use a color consistent with the
-  default font color though.
+  default font color though (default is Paper White)
 
 ## 16bit
 
 - Solid color background. We default to the same color as GRUB (Plasma Blue)
-- None of the graphics must have transparent parts (export with background
-  colors etc.)
-- Logo must be monochrome contrastful color. We default to Paper White
+- None of the graphics must have transparent parts (see below for why)
+- Logo must be monochrome contrastful color consistent with font color.
+  We default to Paper White.
 - Text must use same color as Logo.
 
 # 16bit - What? Why? How?
