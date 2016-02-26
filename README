@@ -63,9 +63,18 @@ Most of the time you can use drop shadows, but all in all no more than 16
 colors can be used, so you will have to make sure the clipped version's drop
 is still appearing as expected.
 
-To convert to <= 16 color version use (< when fewer colors found)
+When converting to <= 16bit colors please note that you first want to assign a
+static background color for fully transparent bits that matches the background
+color used in the script. Since alpha transparency is possibly not available
+or limited to 4bits any transparency will be stripped as part of quantization.
+
+To assing a background and convert to <= 16bit color version
+(< when fewer colors found) you can use:
 ```
-  for foo in *; do pngtopnm $foo | pnmquant 16 | pnmtopng > 16.png; mv 16.png $foo; done
+  for foo in *; do
+    convert $foo -alpha Background -background "#3DAEE9" -fill "#3DAEE9" -flatten $foo
+    pngtopnm $foo | pnmquant 16 | pnmtopng > 16.png; mv 16.png $foo
+  done
 ```
 
 You may want to check that the output makes sense.
