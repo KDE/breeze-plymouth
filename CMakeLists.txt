@@ -16,6 +16,6 @@ find_package(Plymouth REQUIRED)
 set(CMAKE_SHARED_MODULE_PREFIX "")
 
 add_subdirectory(breeze-text)
-install(DIRECTORY breeze DESTINATION ${Plymouth_THEMESDIR})
+add_subdirectory(breeze)
 
 feature_summary(WHAT ALL INCLUDE_QUIET_PACKAGES FATAL_ON_MISSING_REQUIRED_PACKAGES)
