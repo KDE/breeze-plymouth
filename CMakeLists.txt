@@ -11,6 +11,8 @@ include(FeatureSummary)
 
 find_package(Plymouth REQUIRED)
 
+find_library(MATH_LIBRARY m)
+
 # Otherwise MODULE libs have a lib prefix, which is not compatible with
 # plymouth plugin names (i.e we want breeze-text.so not libbreeze-text.so).
 set(CMAKE_SHARED_MODULE_PREFIX "")
