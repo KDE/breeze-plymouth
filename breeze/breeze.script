@@ -186,8 +186,8 @@ fun TextYOffset() {
     local.text_height;
     local.min_height;
 
-    # Put the 1st line below the logo + some spacing
-    y = logo.y + logo.height; # + logo_spacing;
+    // Put the 1st line below the logo.
+    y = spin.GetY() + spin.GetHeight();
 
     text_height = first_line_height * 7.5;
 
@@ -312,22 +312,6 @@ Logo = fun() {
 
 logo = Logo();
 
-message_notification[0].image = ImageToTintedText ("");
-message_notification[1].image = ImageToTintedText ("");
-fsck_notification.image = ImageToActionText ("");
-
-status = "normal";
-
-// use a fixed string with ascending and descending stems to calibrate the
-// bounding box for the first message, so the messages below don't move up
-// and down according to *their* height.
-first_line_height = ImageToTintedText ("AfpqtM").GetHeight();
-
-// if the user has a 640x480 or 800x600 display, we can't quite fit everything
-// (including passphrase prompts) with the target spacing, so scoot the text up
-// a bit if needed.
-top_of_the_text = TextYOffset();
-
 // ----------------------------- Busy Animation ----------------------------- //
 
 Spinner = fun() {
@@ -367,7 +351,33 @@ Spinner.Animate = fun(time) {
     return this;
 };
 
+Spinner.GetY = fun() {
+    return this[0].GetY();
+};
+
+Spinner.GetHeight = fun() {
+    return this[0].height;
+};
+
 global.spin = Spinner();
+
+// ---------------------------- State & Spacing ----------------------------- //
+
+message_notification[0].image = ImageToTintedText ("");
+message_notification[1].image = ImageToTintedText ("");
+fsck_notification.image = ImageToActionText ("");
+
+status = "normal";
+
+// use a fixed string with ascending and descending stems to calibrate the
+// bounding box for the first message, so the messages below don't move up
+// and down according to *their* height.
+first_line_height = ImageToTintedText ("AfpqtM").GetHeight();
+
+// if the user has a 640x480 or 800x600 display, we can't quite fit everything
+// (including passphrase prompts) with the target spacing, so scoot the text up
+// a bit if needed.
+top_of_the_text = TextYOffset();
 
 // ----------------------------- Boot Progress ------------------------------ //
 
