@@ -186,8 +186,8 @@ fun TextYOffset() {
     local.text_height;
     local.min_height;
 
-    # Put the 1st line below the logo + some spacing
-    y = logo.y + logo.height; # + logo_spacing;
+    // Put the 1st line below the logo.
+    y = spin.GetY() + spin.GetHeight();
 
     text_height = first_line_height * 7.5;
 
@@ -349,6 +349,14 @@ Spinner.Animate = fun(time) {
     this[new].SetOpacity(1);
     current_idx = new;
     return this;
+};
+
+Spinner.GetY = fun() {
+    return this[0].GetY();
+};
+
+Spinner.GetHeight = fun() {
+    return this[0].height;
 };
 
 global.spin = Spinner();
