@@ -41,6 +41,9 @@ promptString="Unlocking the disk /dev/sda0 (/media)
 Enter passphrase: "
 plymouth ask-for-password --prompt="${promptString}" --dont-pause-progress
 
+plymouth message --text="Press ENTER to leave"
+plymouth watch-keystroke > /dev/null
+
 #### ^                 ^ ####
 #### | copy to lightdm | ####
 #### |                 | ####
