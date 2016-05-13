@@ -40,13 +40,11 @@ global.assets = [];
 if (Window.GetBitsPerPixel() == 4) {
     assets.logo          = "images/16bit/plasma.logo.png";
     assets.text_input    = "images/16bit/text-input.png";
-
-    assets.spinner_base  = "images/16bit/spinner";
+    assets.spinner       = "images/16bit/spinner.png";
 } else {
     assets.logo          = "images/plasma.logo.png";
     assets.text_input    = "images/text-input.png";
-
-    assets.spinner_base  = "images/spinner";
+    assets.spinner       = "images/spinner.png";
 }
 
 // -------------------------------- Colors ---------------------------------- //
@@ -122,6 +120,13 @@ SpriteImage = fun(asset) {
     sprite.SetImage(sprite.image);
     return sprite | global.SpriteImage;
 } | Sprite;
+
+SpriteImage.SetSpriteImage = fun(image) {
+  this.image = image;
+  this.width = image.GetWidth();
+  this.height = image.GetHeight();
+  this.SetImage(this.image);
+};
 
 // --------------------------------- Debug ---------------------------------- //
 debugsprite = Sprite();
@@ -317,38 +322,20 @@ logo = Logo();
 Spinner = fun() {
   // FIXME: try to use this=
     spinner = global.Spinner | [];
-    spinner.count = 4;
-    spinner.current_idx = -1;
-    spinner.last_time = 0;
-    for (i = 0; i <= spinner.count; ++i) {
-      spinner[i] = SpriteImage(assets.spinner_base + "/" + i + ".png");
-      center_offset = (logo.width / 2) - (spinner[i].width / 2);
-      top_offset = logo.height + spinner[i].height;
-      spinner[i].SetPosition(logo.GetX() + center_offset, logo.GetY() + top_offset, logo.GetZ());
-      spinner[i].SetOpacity(0);
-    }
+    spinner.sprite = SpriteImage(assets.spinner);
+    spinner.sprite.SetOpacity(0);
+    center_offset = (logo.width / 2) - (spinner.sprite.width / 2);
+    top_offset = logo.height + spinner.sprite.height;
+    spinner.sprite.SetPosition(logo.GetX() + center_offset, logo.GetY() + top_offset, logo.GetZ());
+    // sprite holding the reference image
+    spinner.reference = Image(assets.spinner);
     return spinner;
 } | [];
 
-Spinner.ShouldUpdate = fun(time) {
-    passed = time - last_time;
-    // DebugBottom(passed);
-    return passed >= 0.2;
-};
-
 Spinner.Animate = fun(time) {
-    if (!ShouldUpdate(time)) {
-      // DebugMedium("no update " + time);
-      return;
-    }
-    last_time = time;
-    old = current_idx;
-    new = (old + 1) % count;
-    // Debug("going from " + old + " to " + new);
-    this[old].SetOpacity(0);
-    this[new].SetOpacity(1);
-    current_idx = new;
-    return this;
+    rotated_image = reference.Rotate(2 * Math.Pi * time);
+    this.sprite.SetSpriteImage(rotated_image);
+    this.sprite.SetOpacity(1);
 };
 
 Spinner.GetY = fun() {
