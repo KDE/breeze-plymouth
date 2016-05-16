@@ -1,4 +1,9 @@
 # Branding
+## CMake
+Use CMake to set the common overridden variables.
+cmake -DDISTRO_NAME=KDistro -DDISTRO_VERSION=123 -DDISTRO_LOGO=kdistro -DBACKGROUND_TOP_COLOR=kdistro_green -DBACKGROUND_BOTTOM_COLOR=kdistro_blue ..
+
+
 ## Graphics (breeze)
 
 Branding in the graphics mode is done via the code in

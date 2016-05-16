@@ -32,17 +32,17 @@
 
 // -------------------------------- Assets ---------------------------------- //
 
-global.title.text = "Plasma 5.6";
+global.title.text = "@DISTRO_NAME@ @DISTRO_VERSION@";
 global.defaults.font.default = "Noto Sans 12";
 global.defaults.font.title = "Noto Sans 14";
 
 global.assets = [];
 if (Window.GetBitsPerPixel() == 4) {
-    assets.logo          = "images/16bit/plasma.logo.png";
+    assets.logo          = "images/16bit/@DISTRO_LOGO@.logo.png";
     assets.text_input    = "images/16bit/text-input.png";
     assets.spinner       = "images/16bit/spinner.png";
 } else {
-    assets.logo          = "images/plasma.logo.png";
+    assets.logo          = "images/@DISTRO_LOGO@.logo.png";
     assets.text_input    = "images/text-input.png";
     assets.spinner       = "images/spinner.png";
 }
@@ -70,8 +70,8 @@ colors.neon_green = Color(0.1020, 0.7373, 0.6118);
 colors.neon_blue = Color(0.1608, 0.5020, 0.7255);
 
 global.palette = [];
-palette.background.top = colors.plasma_blue;
-palette.background.bottom = colors.icon_blue;
+palette.background.top = colors.@BACKGROUND_TOP_COLOR@;
+palette.background.bottom = colors.@BACKGROUND_BOTTOM_COLOR@;
 palette.text.normal = colors.paper_white;
 palette.text.tinted = colors.paper_white;
 palette.text.action = colors.paper_white;
