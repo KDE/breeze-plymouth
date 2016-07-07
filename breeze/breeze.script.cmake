@@ -339,11 +339,11 @@ Spinner.Animate = fun(time) {
 };
 
 Spinner.GetY = fun() {
-    return this[0].GetY();
+    return this.sprite.GetY();
 };
 
 Spinner.GetHeight = fun() {
-    return this[0].height;
+    return this.sprite.height;
 };
 
 global.spin = Spinner();
