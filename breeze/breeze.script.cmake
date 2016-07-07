@@ -294,6 +294,7 @@ fun StringToInteger (str) {
 
 // ------------------------------ Background -------------------------------- //
 Window.ApplyBackgroundColors();
+global.backgroundApplied = false;
 
 // --------------------------------- Logo ----------------------------------- //
 
@@ -481,14 +482,11 @@ fun hide_message (index) {
     if (global.message_notification[index].sprite) global.message_notification[index].sprite.SetOpacity(0);
 }
 
-
-
-
 # the callback function is called when new message should be displayed.
 # First arg is message to display.
 fun message_callback (message)
 {
-    # Debug("Message callback");
+    // DebugMedium("Message callback " + message);
     is_fake = 0;
     if (!message || (message == "")) is_fake = 1;
 
@@ -966,7 +964,7 @@ fun fsck_check (device, progress, status_string) {
 # Other features can be easily added by parsing the string that we pass plymouth with "--update"
 #
 fun update_status_callback (status) {
-    // Debug(status);
+    // Debug(" STATUS:" + status);
     if (!status) return;
 
     string_it = 0;
@@ -1039,6 +1037,14 @@ Plymouth.SetUpdateStatusFunction (update_status_callback);
  *      the screen correctly
  */
 fun refresh_callback() {
+    // With some nvidia systems when using the script theme the initial
+    // background drawing happens too soon, so we do an additional "fallback"
+    // draw run when the first refresh callback arrives. This should make sure
+    // that we always have a background drawn.
+    if (!global.backgroundApplied) {
+        global.backgroundApplied = true;
+        Window.ApplyBackgroundColors();
+    }
 }
 Plymouth.SetRefreshFunction(refresh_callback);
 
