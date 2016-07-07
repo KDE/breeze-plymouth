@@ -294,6 +294,7 @@ fun StringToInteger (str) {
 
 // ------------------------------ Background -------------------------------- //
 Window.ApplyBackgroundColors();
+global.backgroundApplied = false;
 
 // --------------------------------- Logo ----------------------------------- //
 
@@ -1039,6 +1040,14 @@ Plymouth.SetUpdateStatusFunction (update_status_callback);
  *      the screen correctly
  */
 fun refresh_callback() {
+    // With some nvidia systems when using the script theme the initial
+    // background drawing happens too soon, so we do an additional "fallback"
+    // draw run when the first refresh callback arrives. This should make sure
+    // that we always have a background drawn.
+    if (!global.backgroundApplied) {
+        global.backgroundApplied = true;
+        Window.ApplyBackgroundColors();
+    }
 }
 Plymouth.SetRefreshFunction(refresh_callback);
 
