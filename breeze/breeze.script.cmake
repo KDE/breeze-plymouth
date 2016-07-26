@@ -61,13 +61,14 @@ Color = fun(red, green, blue) {
 } | [];
 
 global.colors = [];
+colors.black = Color(0, 0, 0);
 colors.icon_blue = Color(0.1137, 0.6000, 0.9529);
 colors.plasma_blue = Color(0.2392, 0.6824, 0.913);
-colors.charcoal_grey = Color(0.1922, 0.2118, 0.2314);
 colors.paper_white = Color(0.9882, 0.9882, 0.9882);
+colors.charcoal_grey = Color(0.1922, 0.2118, 0.2314);
 
-colors.neon_green = Color(0.1020, 0.7373, 0.6118);
 colors.neon_blue = Color(0.1608, 0.5020, 0.7255);
+colors.neon_green = Color(0.1020, 0.7373, 0.6118);
 
 global.palette = [];
 palette.background.top = colors.@BACKGROUND_TOP_COLOR@;
