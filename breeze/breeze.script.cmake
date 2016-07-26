@@ -317,7 +317,15 @@ Logo = fun() {
     return logo | global.Logo;
 } | SpriteImage;
 
+Logo.SetOpacity_ = fun(o) {
+    o = Math.Clamp(o, 0.0, 1.0);
+    this.SetOpacity(o);
+    this.name.SetOpacity(o);
+};
+
 logo = Logo();
+logo.SetOpacity_(0);
+
 
 // ----------------------------- Busy Animation ----------------------------- //
 
@@ -337,7 +345,8 @@ Spinner = fun() {
 Spinner.Animate = fun(time) {
     rotated_image = reference.Rotate(2 * Math.Pi * time);
     this.sprite.SetSpriteImage(rotated_image);
-    this.sprite.SetOpacity(1);
+    this.sprite.SetOpacity(0);
+    // FIXME: not sure what to do with this for 5.8 redesign
 };
 
 Spinner.GetY = fun() {
@@ -377,6 +386,7 @@ top_of_the_text = TextYOffset();
  */
 fun boot_progress_cb(time, progress) {
     spin.Animate(time);
+    logo.SetOpacity_(time * 2.0);
 }
 Plymouth.SetBootProgressFunction (boot_progress_cb);
 
@@ -1067,9 +1077,10 @@ fun display_normal_callback() {
 Plymouth.SetDisplayNormalFunction (display_normal_callback);
 
 /**
- * Show the logo and make the progress indicator look full when on exit
+ * Switch to final state.
  */
 fun quit_callback() {
+  logo.SetOpacity_(0);
 }
 Plymouth.SetQuitFunction(quit_callback);
 
