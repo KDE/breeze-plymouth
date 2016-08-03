@@ -66,6 +66,7 @@ colors.icon_blue = Color(0.1137, 0.6000, 0.9529);
 colors.plasma_blue = Color(0.2392, 0.6824, 0.913);
 colors.paper_white = Color(0.9882, 0.9882, 0.9882);
 colors.charcoal_grey = Color(0.1922, 0.2118, 0.2314);
+colors.cardboard_grey = Color(0.9373, 0.9412, 0.9451);
 
 colors.neon_blue = Color(0.1608, 0.5020, 0.7255);
 colors.neon_green = Color(0.1020, 0.7373, 0.6118);
@@ -73,9 +74,9 @@ colors.neon_green = Color(0.1020, 0.7373, 0.6118);
 global.palette = [];
 palette.background.top = colors.@BACKGROUND_TOP_COLOR@;
 palette.background.bottom = colors.@BACKGROUND_BOTTOM_COLOR@;
-palette.text.normal = colors.paper_white;
-palette.text.tinted = colors.paper_white;
-palette.text.action = colors.paper_white;
+palette.text.normal = colors.cardboard_grey;
+palette.text.tinted = colors.cardboard_grey;
+palette.text.action = colors.cardboard_grey;
 palette.text.contrast = colors.charcoal_grey; // Inverse essentially
 
 /**
