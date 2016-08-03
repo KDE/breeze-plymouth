@@ -49,14 +49,14 @@ white=0x000000 # This is the progress bar & title
 
 - 128x128
 - A monochrome logo is fine, it should use a color consistent with the
-  default font color though (default is Paper White)
+  default font color though (default is "Cardboard Grey")
 
 ## 16bit
 
 - Solid color background. We default to the same color as GRUB (Plasma Blue)
 - None of the graphics must have transparent parts (see below for why)
 - Logo must be monochrome contrastful color consistent with font color.
-  We default to Paper White.
+  We default to "Cardboard Grey".
 - Text must use same color as Logo.
 
 # 16bit - What? Why? How?
@@ -82,7 +82,7 @@ To assing a background and convert to <= 16bit color version
 (< when fewer colors found) you can use:
 ```
   for foo in *; do
-    convert $foo -alpha Background -background "#3DAEE9" -fill "#3DAEE9" -flatten $foo
+    convert $foo -alpha Background -background "#000000" -fill "#000000" -flatten $foo
     pngtopnm $foo | pnmquant 16 | pnmtopng > 16.png; mv 16.png $foo
   done
 ```
