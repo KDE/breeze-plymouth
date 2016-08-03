@@ -337,10 +337,10 @@ create_plugin (ply_key_file_t *key_file)
   plugin->views = ply_list_new ();
 
   /* Not a pretty API for setting defaults for your config file... */
-  plugin->black = 0x3daee9;
-  plugin->white = 0xfcfcfc; // progress bar block 1
-  plugin->blue  = 0xfcfcfc; // progress bar block 2
-  plugin->brown = 0xfcfcfc; // progress bar block 3
+  plugin->black = 0x000000;
+  plugin->white = 0xeff0f1; // progress bar block 1
+  plugin->blue  = 0xeff0f1; // progress bar block 2
+  plugin->brown = 0xeff0f1; // progress bar block 3
 
   option = ply_key_file_get_value (key_file, PLUGIN_NAME, "black");
   if (option)
