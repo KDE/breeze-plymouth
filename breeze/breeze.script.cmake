@@ -40,11 +40,13 @@ global.assets = [];
 if (Window.GetBitsPerPixel() == 4) {
     assets.logo          = "images/16bit/@DISTRO_LOGO@.logo.png";
     assets.text_input    = "images/16bit/text-input.png";
-    assets.spinner       = "images/16bit/spinner.png";
+
+    assets.spinner_base  = "images/16bit/spinner";
 } else {
     assets.logo          = "images/@DISTRO_LOGO@.logo.png";
     assets.text_input    = "images/text-input.png";
-    assets.spinner       = "images/spinner.png";
+
+    assets.spinner_base  = "images/spinner";
 }
 
 // -------------------------------- Colors ---------------------------------- //
@@ -124,10 +126,10 @@ SpriteImage = fun(asset) {
 } | Sprite;
 
 SpriteImage.SetSpriteImage = fun(image) {
-  this.image = image;
-  this.width = image.GetWidth();
-  this.height = image.GetHeight();
-  this.SetImage(this.image);
+    this.image = image;
+    this.width = image.GetWidth();
+    this.height = image.GetHeight();
+    this.SetImage(this.image);
 };
 
 // --------------------------------- Debug ---------------------------------- //
@@ -331,23 +333,54 @@ logo.SetOpacity_(0);
 // ----------------------------- Busy Animation ----------------------------- //
 
 Spinner = fun() {
-  // FIXME: try to use this=
+    // FIXME: try to use this=
     spinner = global.Spinner | [];
-    spinner.sprite = SpriteImage(assets.spinner);
-    spinner.sprite.SetOpacity(0);
-    center_offset = (logo.width / 2) - (spinner.sprite.width / 2);
-    top_offset = logo.height + spinner.sprite.height;
-    spinner.sprite.SetPosition(logo.GetX() + center_offset, logo.GetY() + top_offset, logo.GetZ());
-    // sprite holding the reference image
-    spinner.reference = Image(assets.spinner);
+    spinner.count = 360;
+    spinner.current_idx = 0;
+    spinner.last_time = 0;
+    spinner.steps = 10.0; // We render degrees in increments of 10 to save disk.
+    spinner.duration = 1.5; // Seconds per rotation.
+    for (i = 0; i <= spinner.count; ++i) {
+        if (i % spinner.steps != 0) {
+            continue;
+        }
+        spinner[i] = SpriteImage(assets.spinner_base + "/spinner" + i + ".png");
+        center_offset = (logo.width / 2) - (spinner[i].width / 2);
+        top_offset = logo.height + spinner[i].height;
+        spinner[i].SetPosition(logo.GetX() + center_offset, logo.GetY() + top_offset, logo.GetZ());
+        spinner[i].SetOpacity(0);
+    }
     return spinner;
 } | [];
 
+Spinner.ShouldUpdate = fun(time) {
+    passed = time - last_time;
+    return passed >= 0.2;
+};
+
+Math.IsOdd = fun(value) {
+    return Math.Abs(value % 2) == 1;
+};
+
 Spinner.Animate = fun(time) {
-    rotated_image = reference.Rotate(2 * Math.Pi * time);
-    this.sprite.SetSpriteImage(rotated_image);
-    this.sprite.SetOpacity(0);
-    // FIXME: not sure what to do with this for 5.8 redesign
+    degrees = Math.Int(((2 * Math.Pi / duration) * time) * (180 / Math.Pi));
+    new = degrees % count;
+    old = current_idx;
+    if (Math.Int(new) < Math.Int((old + steps) % count)) {
+        // Every $steps degrees we can render a frame, all others we skip.
+        return;
+    }
+    // We set a second new which is now a correct index bump by coercing it
+    // into a multiple of 10.
+    new = Math.Int(new / steps) * steps;
+    // Debug("going from " + old + " to " + new);
+    // dps = time - last_time;
+    // DebugMedium("dps " + dps*35);
+    // last_time = time;
+    this[old].SetOpacity(0);
+    this[new].SetOpacity(1);
+    current_idx = new;
+    return this;
 };
 
 Spinner.GetY = fun() {
