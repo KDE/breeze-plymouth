@@ -353,15 +353,6 @@ Spinner = fun() {
     return spinner;
 } | [];
 
-Spinner.ShouldUpdate = fun(time) {
-    passed = time - last_time;
-    return passed >= 0.2;
-};
-
-Math.IsOdd = fun(value) {
-    return Math.Abs(value % 2) == 1;
-};
-
 Spinner.Animate = fun(time) {
     degrees = Math.Int(((2 * Math.Pi / duration) * time) * (180 / Math.Pi));
     new = degrees % count;
