@@ -133,6 +133,11 @@ SpriteImage.SetSpriteImage = fun(image) {
 };
 
 // --------------------------------- Debug ---------------------------------- //
+// TODO: it may be handy to move all debug methods into a separate file
+//   and configure_file them into the master script iff explicitly enabled.
+//   This would reduce the script size and possibly eval time. Although
+//   in the grand scheme of things I am not sure this script takes up a lot of
+//   resources to begin with.
 debugsprite = Sprite();
 debugsprite_bottom = Sprite();
 debugsprite_medium = Sprite();
@@ -189,6 +194,33 @@ fun DebugMedium(text) {
     debugsprite_medium.SetImage(ImageToText (text));
     debugsprite_medium.SetPosition(0, (Window.GetHeight (0) - 60), 1);
 }
+
+/**
+ * Debug helper to simulate something like a log on the right hand side of
+ * the display. There is a global ActionStack which gets .Log("foo")'d into
+ * which essentially prepends the string to an internal string buffer which
+ * is then rendered into a sprite.
+ * The buffer is not ever emptied so this basically is growing memory
+ * consumption. And it's offset placing from the rigth side is also getting
+ * increasingly wrong as the largest ever logged line dictates the offset.
+ */
+Logger = fun() {
+    local.logger = [];
+    local.logger.log = "";
+    local.logger.sprite = Sprite();
+    return logger | global.Logger;
+} | [];
+
+Logger.Log = fun(text) {
+    log = text + "\n" + log;
+    Print();
+};
+
+Logger.Print = fun() {
+    sprite.SetImage(ImageToText(log));
+    sprite.SetPosition(Window.GetMaxWidth() - sprite.GetImage().GetWidth() - 16, 0, 1);
+};
+global.logger = Logger();
 
 fun TextYOffset() {
     local.y;
