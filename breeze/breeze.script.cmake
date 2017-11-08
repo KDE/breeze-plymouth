@@ -208,14 +208,15 @@ fun TextYOffset() {
     // window!
     local.min_height = Window.GetHeight() + Window.GetY();
 
-    if (y + text_height > min_height)
+    if (y + text_height > min_height) {
         y = min_height - text_height;
-    else {
+    } else {
         y = y + ((min_height - y - text_height) /2);
     }
 
-    if (y < logo.text.GetY() + logo.text.height + first_line_height/2)
+    if (y < logo.text.GetY() + logo.text.height + first_line_height/2) {
         y = logo.text.GetY() + logo.text.height + first_line_height/2;
+    }
 
     return y;
 }
