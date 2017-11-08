@@ -222,6 +222,12 @@ Logger.Print = fun() {
 };
 global.logger = Logger();
 
+/**
+ * Calulates the Y of the label "box". That is, the top most point at which
+ * we should put elements that are meant to go below the logo/spinner/whatevs
+ * as to not overlap with the aforementioned. This includes message display,
+ * password prompt and so forth.
+ */
 fun TextYOffset() {
     local.y;
     local.text_height;
