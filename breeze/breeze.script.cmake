@@ -201,7 +201,12 @@ fun TextYOffset() {
     text_height = first_line_height * 7.5;
 
     // FIXME: why minimum?
-    local.min_height = Window.GetHeight();
+    // The maximum Y we may end at, if we exceed this we'll try to scoot up
+    // a bit. This includes the Window offset itself as we position ourselves
+    // relative to the Spinner which is relative to the Logo which is relative
+    // to the center of the window TAKING INTO ACCOUNT the y offset of the
+    // window!
+    local.min_height = Window.GetHeight() + Window.GetY();
 
     if (y + text_height > min_height)
         y = min_height - text_height;
