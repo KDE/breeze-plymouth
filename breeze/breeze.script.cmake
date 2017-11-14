@@ -252,8 +252,12 @@ fun TextYOffset() {
         y = y + ((min_height - y - text_height) /2);
     }
 
-    if (y < logo.text.GetY() + logo.text.height + first_line_height/2) {
-        y = logo.text.GetY() + logo.text.height + first_line_height/2;
+    // This basically undoes whatever went on above, to a degree...
+    // If the y would overlap with the Spinner (bottom most element of the
+    // static cruft) we move it further down so that at least half a line of
+    // space is between the spinner and our y.
+    if (y < spin.GetY() + spin.GetHeight() + first_line_height / 2) {
+        y = spin.GetY() + spin.GetHeight() + first_line_height / 2;
     }
 
     return y;
