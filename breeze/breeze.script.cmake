@@ -229,15 +229,9 @@ global.logger = Logger();
  * password prompt and so forth.
  */
 fun TextYOffset() {
-    local.y;
-    local.text_height;
-    local.max_y;
-
     // Put the 1st line below the logo.
-    y = spin.GetY() + spin.GetHeight();
-
-    text_height = first_line_height * 7.5;
-
+    local.y = spin.GetY() + spin.GetHeight();
+    local.text_height = first_line_height * 7.5;
     // The maximum Y we may end at, if we exceed this we'll try to scoot up
     // a bit. This includes the Window offset itself as we position ourselves
     // relative to the Spinner which is relative to the Logo which is relative
@@ -470,7 +464,6 @@ Plymouth.SetBootProgressFunction (boot_progress_cb);
 #
 fun get_message_label (label, is_fake, is_action_line) {
     # Debug("Get Label position");
-    local.message_label;
 
     if (is_fake)
         # Create a fake label so as to get the y coordinate of
@@ -479,6 +472,7 @@ fun get_message_label (label, is_fake, is_action_line) {
     else
         local.message_image = (is_action_line) && ImageToActionText (label) || ImageToTintedText (label);
 
+    local.message_label = [];
     message_label.width = message_image.GetWidth ();
     message_label.height = message_image.GetHeight ();
 
@@ -610,10 +604,8 @@ Plymouth.SetMessageFunction (message_callback);
 fun password_dialog_setup (message_label) {
     # Debug("Password dialog setup");
 
-    local.entry;
-    local.bullet_image;
-
-    bullet_image = WriteText("•", palette.text.contrast);
+    local.bullet_image = WriteText("•", palette.text.contrast);
+    local.entry = [];
     entry.image = Image (assets.text_input);
 
     # Hide the normal labels
