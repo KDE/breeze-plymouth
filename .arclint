@@ -1,0 +1,26 @@
+{
+  "linters": {
+    "text-length-only": {
+      "type": "text",
+      "text.max-line-length": 110,
+      "severity.rules": {
+        "([^3])": "disabled"
+      },
+      "exclude": "(^breeze-text/ply-text-progress-bar.c|CMakeLists.txt)"
+    },
+    "text": {
+      "type": "text",
+      "severity": {
+        "3": "disabled",
+        "5": "disabled"
+      },
+      "exclude": "(breeze-text/ply-text-progress-bar.c)"
+    },
+    "spelling": {
+      "type": "spelling"
+    },
+    "merge-conflict": {
+      "type": "merge-conflict"
+    }
+  }
+}
