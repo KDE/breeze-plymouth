@@ -231,25 +231,24 @@ global.logger = Logger();
 fun TextYOffset() {
     local.y;
     local.text_height;
-    local.min_height;
+    local.max_y;
 
     // Put the 1st line below the logo.
     y = spin.GetY() + spin.GetHeight();
 
     text_height = first_line_height * 7.5;
 
-    // FIXME: why minimum?
     // The maximum Y we may end at, if we exceed this we'll try to scoot up
     // a bit. This includes the Window offset itself as we position ourselves
     // relative to the Spinner which is relative to the Logo which is relative
     // to the center of the window TAKING INTO ACCOUNT the y offset of the
     // window!
-    local.min_height = Window.GetHeight() + Window.GetY();
+    local.max_y = Window.GetHeight() + Window.GetY();
 
-    if (y + text_height > min_height) {
-        y = min_height - text_height;
+    if (y + text_height > max_y) {
+        y = max_y - text_height;
     } else {
-        y = y + ((min_height - y - text_height) /2);
+        y = y + ((max_y - y - text_height) /2);
     }
 
     // This basically undoes whatever went on above, to a degree...
