@@ -242,7 +242,7 @@ fun TextYOffset() {
     if (y + text_height > max_y) {
         y = max_y - text_height;
     } else {
-        y = y + ((max_y - y - text_height) /2);
+        y = y + ((max_y - y - text_height) / 2);
     }
 
     // This basically undoes whatever went on above, to a degree...
@@ -304,7 +304,9 @@ fun StringLength (string) {
 
 fun StringCopy (source, beginning, end) {
     local.destination = "";
-    for (index = beginning; ( ( (end == NULL) || (index <= end) ) && (String(source).CharAt(index)) ); index++) {
+    for (index = beginning;
+         (((end == NULL) || (index <= end) ) && (String(source).CharAt(index)));
+         index++) {
         local.destination += String(source).CharAt(index);
     }
 
@@ -536,7 +538,8 @@ fun get_fsck_label (label, is_fake) {
 #
 fun setup_message (message_text, x, y, z, index) {
     # Debug("Message setup");
-    global.message_notification[index].image = (index) && ImageToActionText (message_text) || ImageToTintedText (message_text);
+    global.message_notification[index].image =
+        (index) && ImageToActionText (message_text) || ImageToTintedText (message_text);
 
     # Set up the text message, if any
     message_notification[index].x = x;
@@ -659,8 +662,6 @@ fun password_dialog_opacity (opacity) {
 # The callback function is called when the display should display a password dialog.
 # First arg is prompt string, the second is the number of bullets.
 fun display_password_callback (prompt, bullets) {
-    # Debug("Password dialog setup");
-
     global.status = "password";
     if (!global.password_dialog)
         password_dialog_setup(prompt);
@@ -672,9 +673,7 @@ fun display_password_callback (prompt, bullets) {
     margin = bullet_width;
     spaces = Math.Int((password_dialog.entry.image.GetWidth () - (margin * 2)) / bullet_width);
     bullets_area.width = (margin * 2) + (spaces * bullet_width);
-//     Debug ("dialog width =" + password_dialog.entry.image.GetWidth () + " , bullets area width = " + bullets_area.width + ", spaces = " + spaces + ", bullets = " + bullets);
     bullets_area.x = Window.GetX () + Window.GetWidth () / 2 - bullets_area.width / 2;
-//     DebugBottom ("bullet_width = " + bullet_width + " , pwd_entry x = " + password_dialog.entry.x + ", bullets_area.x = " + bullets_area.x + ", bullets_area.width = " + bullets_area.width);
     if (bullets > spaces)
         bullets = spaces;
     for (index = 0; password_dialog.bullets[index] || index < bullets; index++){
@@ -960,20 +959,15 @@ fun fsck_check (device, progress, status_string) {
 
 
     if (device_has_progress_label (device)) {
-        # Update the progress of the existing label
+        // Update the progress of the existing label
         update_progress_label (progress);
     }
     else {
         //  See if there's already a slot in the queue for the device
         local.queue_device_index = queue_look_up_by_device(device);
 
-        # See if the progress_label is available
+        // See if the progress_label is available
         if (progress_label.is_available) {
-
-#            local.my_string = "available index " + local.available_index + " progress_bar counter is " + progress_bar.counter;
-#            Debug(local.my_string);
-
-
             # If the fsck check for the device was in the queue, then
             # remove it from the queue
             if (local.queue_device_index >= 0) {
@@ -984,10 +978,7 @@ fun fsck_check (device, progress, status_string) {
                 increase_fsck_count ();
             }
 
-#            local.my_string += local.message;
-            #Debug("setting new label for device " + device + " progress " + progress);
-
-            # Set up a new label for the check
+            // Set up a new label for the check
             init_progress_label (device, status_string);
             update_progress_label (progress);
 
@@ -1014,13 +1005,6 @@ fun fsck_check (device, progress, status_string) {
 
         }
     }
-
-#    if (!is_queue_empty ()) {
-#        DebugBottom("Extra label for "+ device);
-    #}
-#    else {
-#        DebugBottom("No extra label for " + device + ". 1st Device in the queue "+ fsck_queue[0].device + " counter = " + global.fsck_queue.counter);
-#    }
 }
 
 
@@ -1053,9 +1037,7 @@ fun update_status_callback (status) {
             update_strings[++string_it] = "";
     }
 
-#    my_string = update_strings[0] + " " + update_strings[1] + " " + update_strings[2];
-#    Debug(my_string);
-    # Let's assume that we're dealing with these strings fsck:sda1:40
+    // Let's assume that we're dealing with these strings fsck:sda1:40
     if ((string_it >= 2) && (update_strings[0] == "fsck")) {
 
         device = update_strings[1];

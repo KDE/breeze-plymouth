@@ -6,4 +6,3 @@ ModuleName=script
 [script]
 ImageDir=@Plymouth_THEMESDIR@/breeze
 ScriptFile=@Plymouth_THEMESDIR@/breeze/breeze.script
-
