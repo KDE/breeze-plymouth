@@ -53,7 +53,7 @@ white=0x000000 # This is the progress bar & title
 
 ## 16bit
 
-- Solid color background. We default to the same color as GRUB (Plasma Blue)
+- Solid color background. We default to the same color as GRUB
 - None of the graphics must have transparent parts (see below for why)
 - Logo must be monochrome contrastful color consistent with font color.
   We default to "Cardboard Grey".
