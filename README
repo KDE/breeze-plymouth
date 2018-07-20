@@ -44,6 +44,13 @@ black=0xfcfcfc # This is the background
 white=0x000000 # This is the progress bar & title
 ```
 
+## Grub
+
+breeze/breeze.grub is a special grub scripting file which mostly sets sane
+defaults in the event that breeze-grub (when used) is malfunctioning. You can
+simply cat the file into your grub.cfg (happens automatically on Debian systems
+when the plymouth theme is configured as default)
+
 # Design Guideline
 ## Logo
 
@@ -53,7 +60,7 @@ white=0x000000 # This is the progress bar & title
 
 ## 16bit
 
-- Solid color background. We default to the same color as GRUB (Plasma Blue)
+- Solid color background. We default to the same color as GRUB
 - None of the graphics must have transparent parts (see below for why)
 - Logo must be monochrome contrastful color consistent with font color.
   We default to "Cardboard Grey".
