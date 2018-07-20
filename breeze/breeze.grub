@@ -2,6 +2,6 @@
 
 set menu_color_normal=blue/black
 set menu_color_highlight=red/light-gray
-if background_color 1,1,1; then
+if background_color 0,0,0; then
   clear
 fi
