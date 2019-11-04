@@ -8,6 +8,7 @@ find_package(ECM 1.8.0 REQUIRED NO_MODULE)
 set(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake ${ECM_MODULE_PATH} ${ECM_KDE_MODULE_DIR})
 
 include(FeatureSummary)
+include(KDEClangFormat)
 
 find_package(Plymouth REQUIRED)
 
@@ -25,5 +26,9 @@ add_feature_info(DISTRO_VERSION On "version to use on splash screen is '${DISTRO
 
 add_subdirectory(breeze-text)
 add_subdirectory(breeze)
+
+# add clang-format target for all our real source files
+file(GLOB_RECURSE ALL_CLANG_FORMAT_SOURCE_FILES *.cpp *.h)
+kde_clang_format(${ALL_CLANG_FORMAT_SOURCE_FILES})
 
 feature_summary(WHAT ALL INCLUDE_QUIET_PACKAGES FATAL_ON_MISSING_REQUIRED_PACKAGES)
