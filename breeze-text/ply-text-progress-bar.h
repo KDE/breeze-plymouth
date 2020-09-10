@@ -1,25 +1,12 @@
 /* ply-text-progress-bar.h - simple text based pulsing animation
  *
- * Copyright (C) 2008 Red Hat, Inc.
+ * SPDX-FileCopyrightText: 2008 Red Hat Inc. 
+ * SPDX-FileContributor: Adam Jackson <ajax@redhat.com>
+ * SPDX-FileContributor: Bill Nottingham <notting@redhat.com>
+ * SPDX-FileContributor: Ray Strode <rstrode@redhat.com>
+ * SPDX-FileContributor: Soeren Sandmann <sandmann@redhat.com>
  *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2, or (at your option)
- * any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA
- * 02111-1307, USA.
- *
- * Written by: Adam Jackson <ajax@redhat.com>
- *             Bill Nottingham <notting@redhat.com>
- *             Ray Strode <rstrode@redhat.com>
+ * SPDX-License-Identifier: GPL-2.0-or-later
  */
 #ifndef BREEZE_TEXT_PROGRESS_BAR_H
 #define BREEZE_TEXT_PROGRESS_BAR_H
