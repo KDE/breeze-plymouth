@@ -19,11 +19,19 @@ find_library(MATH_LIBRARY m)
 # plymouth plugin names (i.e we want breeze-text.so not libbreeze-text.so).
 set(CMAKE_SHARED_MODULE_PREFIX "")
 
-set(DISTRO_NAME "Plasma" CACHE STRING "Name to use on splash screen")
-set(DISTRO_VERSION ${PROJECT_VERSION} CACHE STRING "Version to use on splash screen")
+if(NOT DISTRO_NAME AND "${CMAKE_VERSION}" VERSION_GREATER_EQUAL "3.22.0")
+    cmake_host_system_information(RESULT PRETTY_NAME QUERY DISTRIB_PRETTY_NAME)
+endif()
+
+if(NOT PRETTY_NAME)
+    set(PRETTY_NAME "Plasma ${PROJECT_VERSION}")
+endif()
+
+set(DISTRO_NAME "${PRETTY_NAME}" CACHE STRING "Name to use on splash screen (defaults to os-release)")
+set(DISTRO_VERSION "" CACHE STRING "Version to use on splash screen") # prefer to have the version in the name, makes it easier for os-release data
 
 add_feature_info(DISTRO_NAME On "name to use on splash screen is '${DISTRO_NAME}'")
-add_feature_info(DISTRO_VERSION On "version to use on splash screen is '${DISTRO_VERSION}'")
+add_feature_info(DISTRO_VERSION On "extra version to use on splash screen is '${DISTRO_VERSION}'")
 
 add_subdirectory(breeze-text)
 add_subdirectory(breeze)
