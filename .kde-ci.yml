@@ -1,0 +1,8 @@
+Dependencies:
+- 'on': ['Linux', 'FreeBSD']
+  'require':
+    'frameworks/extra-cmake-modules': '@stable'
+
+Options:
+  # force installation into the install prefix
+  cmake-options: '-DINSTALL_BROKEN_PLYMOUTH_DATA=ON'
