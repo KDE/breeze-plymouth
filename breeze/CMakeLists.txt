@@ -13,6 +13,6 @@ install(FILES breeze.grub
               preview.png
               ${CMAKE_CURRENT_BINARY_DIR}/breeze.script
               ${CMAKE_CURRENT_BINARY_DIR}/breeze.plymouth
-        DESTINATION ${Plymouth_THEMESDIR}/breeze)
+        DESTINATION ${PLYMOUTH_THEME_INSTALL_DIR}/breeze)
 install(DIRECTORY images
-        DESTINATION ${Plymouth_THEMESDIR}/breeze)
+        DESTINATION ${PLYMOUTH_THEME_INSTALL_DIR}/breeze)

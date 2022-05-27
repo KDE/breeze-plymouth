@@ -33,6 +33,18 @@ set(DISTRO_VERSION "" CACHE STRING "Version to use on splash screen") # prefer t
 add_feature_info(DISTRO_NAME On "name to use on splash screen is '${DISTRO_NAME}'")
 add_feature_info(DISTRO_VERSION On "extra version to use on splash screen is '${DISTRO_VERSION}'")
 
+# Allow to force installation into CMAKE_INSTALL_PREFIX, even if that would
+# result in a non-functional installation. This is needed e.g. for the CI
+option(INSTALL_BROKEN_PLYMOUTH_DATA "Force installation into CMAKE_INSTALL_PREFIX, will possibly result in a non-functional installation and is only intended for CI/development use!" OFF)
+if (INSTALL_BROKEN_PLYMOUTH_DATA)
+    message(WARNING "Installing Plymouth theme to the wrong location!")
+    set(PLYMOUTH_THEME_INSTALL_DIR "${CMAKE_INSTALL_PREFIX}/${Plymouth_THEMESDIR}")
+    set(PLYMOUTH_PLUGIN_INSTALL_DIR "${CMAKE_INSTALL_PREFIX}/${Plymouth_PLUGINSDIR}")
+else()
+    set(PLYMOUTH_THEME_INSTALL_DIR ${Plymouth_THEMESDIR})
+    set(PLYMOUTH_PLUGIN_INSTALL_DIR ${Plymouth_PLUGINSDIR})
+endif()
+
 add_subdirectory(breeze-text)
 add_subdirectory(breeze)
 
