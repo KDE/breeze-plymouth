@@ -1,6 +1,6 @@
 project(breeze-plymouth)
 set(PROJECT_VERSION "5.27.80")
-set(PROJECT_VERSION_MAJOR 5)
+set(PROJECT_VERSION_MAJOR 6)
 
 cmake_minimum_required(VERSION 2.8.12 FATAL_ERROR)
 
