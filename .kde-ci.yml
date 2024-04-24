@@ -1,7 +1,7 @@
 Dependencies:
 - 'on': ['Linux', 'FreeBSD']
   'require':
-    'frameworks/extra-cmake-modules': '@stable'
+    'frameworks/extra-cmake-modules': '@stable-kf6'
 
 Options:
   # force installation into the install prefix
