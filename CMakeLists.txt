@@ -4,7 +4,7 @@ set(PROJECT_VERSION_MAJOR 6)
 
 cmake_minimum_required(VERSION 2.8.12 FATAL_ERROR)
 
-find_package(ECM 6.0.90 REQUIRED NO_MODULE)
+find_package(ECM 6.2.0 REQUIRED NO_MODULE)
 set(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake ${ECM_MODULE_PATH} )
 
 include(FeatureSummary)
