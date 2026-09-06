@@ -329,15 +329,15 @@ global.backgroundApplied = false;
 
 // --------------------------------- Logo ----------------------------------- //
 
-Logo = fun() {
+Logo = fun(window) {
     local.logo = SpriteImage(assets.logo);
-    logo.x = Window.GetX() + Window.GetWidth() / 2 - logo.width / 2;
-    logo.y = Window.GetY() + Window.GetHeight() / 2 - logo.height / 2;
+    logo.x = Window.GetX(window) + Window.GetWidth(window) / 2 - logo.width / 2;
+    logo.y = Window.GetY(window) + Window.GetHeight(window) / 2 - logo.height / 2;
     logo.z = 1000;
     logo.SetPosition(logo.x, logo.y, logo.z);
 
     logo.name = Sprite(title.text.ToImage(NULL, defaults.font.title));
-    logo.name.x = Window.GetX() + Window.GetWidth() / 2 - logo.name.GetImage().GetWidth() / 2;
+    logo.name.x = Window.GetX(window) + Window.GetWidth(window) / 2 - logo.name.GetImage().GetWidth() / 2;
     logo.name.y = logo.y + logo.height + logo.name.GetImage().GetHeight() / 2;
     logo.name.z = logo.z;
     logo.name.SetPosition(logo.name.x, logo.name.y, logo.z);
@@ -353,13 +353,17 @@ Logo.SetOpacity_ = fun(o) {
     this.name.SetOpacity(o);
 };
 
-logo = Logo();
-logo.SetOpacity_(0);
+global.logos = [];
+for (window = 0; Window.GetWidth(window); window++) {
+    logos[window] = Logo(window);
+    logos[window].SetOpacity_(0);
+}
+global.logo = logos[0];
 
 
 // ----------------------------- Busy Animation ----------------------------- //
 
-Spinner = fun() {
+Spinner = fun(target_logo) {
     // FIXME: try to use this=
     spinner = global.Spinner | [];
     spinner.count = 360;
@@ -372,9 +376,11 @@ Spinner = fun() {
             continue;
         }
         spinner[i] = SpriteImage(assets.spinner_base + "/spinner" + i + ".png");
-        center_offset = (logo.width / 2) - (spinner[i].width / 2);
-        top_offset = logo.height + spinner[i].height;
-        spinner[i].SetPosition(logo.GetX() + center_offset, logo.GetY() + top_offset, logo.GetZ());
+        center_offset = (target_logo.width / 2) - (spinner[i].width / 2);
+        top_offset = target_logo.height + spinner[i].height;
+        spinner[i].SetPosition(target_logo.GetX() + center_offset,
+                               target_logo.GetY() + top_offset,
+                               target_logo.GetZ());
         spinner[i].SetOpacity(0);
     }
     return spinner;
@@ -409,7 +415,11 @@ Spinner.GetHeight = fun() {
     return this[0].height;
 };
 
-global.spin = Spinner();
+global.spins = [];
+for (window = 0; logos[window]; window++) {
+    spins[window] = Spinner(logos[window]);
+}
+global.spin = spins[0];
 
 // ---------------------------- State & Spacing ----------------------------- //
 
@@ -437,8 +447,10 @@ top_of_the_text = TextYOffset();
  * \param progress boot progress in % (real 0.0 to 1.0)
  */
 fun boot_progress_cb(time, progress) {
-    spin.Animate(time);
-    logo.SetOpacity_(time * 2.0);
+    for (window = 0; logos[window]; window++) {
+        spins[window].Animate(time);
+        logos[window].SetOpacity_(time * 2.0);
+    }
 }
 Plymouth.SetBootProgressFunction (boot_progress_cb);
 
@@ -1110,7 +1122,9 @@ Plymouth.SetDisplayNormalFunction (display_normal_callback);
  * Switch to final state.
  */
 fun quit_callback() {
-  logo.SetOpacity_(0);
+  for (window = 0; logos[window]; window++) {
+    logos[window].SetOpacity_(0);
+  }
 }
 Plymouth.SetQuitFunction(quit_callback);
 
